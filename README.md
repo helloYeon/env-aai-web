@@ -7,7 +7,7 @@ This is a basic LAMP environment built using Docker Compose. It consists followi
 - apache2.4
 - mysql8.0
 - composer
-- node js (Gulp)
+- node js
 
 ## Constitution
 ```
