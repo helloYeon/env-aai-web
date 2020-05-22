@@ -1,0 +1,43 @@
+version: "3"
+services:
+  web:
+    build: ./docker/web
+    privileged: true
+    command: /sbin/init
+    ports:
+      - 10080:80
+    depends_on:
+      - db
+    volumes:
+      - ./src:/var/www/html
+      - ./logs:/var/log/php
+      - ./logs:/var/log/httpd
+      - ./docker/web/php.ini:/etc/php.ini
+    working_dir: /var/www/html
+    restart: always
+    environment:
+      - TZ=${TZ}
+      - DB_CONNECTION=mysql
+      - DB_HOST=${DB_HOST}
+      - DB_DATABASE=${DB_NAME}
+      - DB_USERNAME=${DB_USER}
+      - DB_PASSWORD=${DB_PASS}
+      - DB_PORT=3306
+  db:
+    image: mysql:8.0
+    volumes:
+      - db-store:/var/lib/mysql
+      - ./logs:/var/log/mysql
+      - ./docker/db/my.cnf:/etc/mysql/conf.d/my.cnf
+    environment:
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASS}
+      - MYSQL_ROOT_PASSWORD=${DB_PASS}
+      - TZ=${TZ}
+    ports:
+      - "3306:3306"
+volumes:
+  db-store:
+
+
