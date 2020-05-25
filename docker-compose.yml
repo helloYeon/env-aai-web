@@ -25,6 +25,7 @@ services:
       - DB_PORT=3306
   db:
     image: mysql:8.0
+    container_name: mysql-db
     volumes:
       - db-store:/var/lib/mysql
       - ./logs:/var/log/mysql
