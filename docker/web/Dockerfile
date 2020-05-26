@@ -1,13 +1,14 @@
 FROM centos:7
 RUN yum -y update
-RUN yum -y remove httpd httpd.x86_64 httpd-tools.x86_64
-RUN yum -y remove php-*
+#RUN yum -y remove httpd httpd.x86_64 httpd-tools.x86_64
+#RUN yum -y remove php-*
 
 # install tools 
 RUN yum -y install zip unzip which
 
 # install apache24
-RUN yum -y install httpd
+RUN yum -y install httpd && \
+    yum clean all
 #    sed -i -e 's/\(IncludeOptional conf\)/#\1/g' /etc/httpd/conf/httpd.conf
 
 # install php73
