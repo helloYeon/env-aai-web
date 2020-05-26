@@ -41,17 +41,17 @@ env-aai-web/
 git clone git@github.com:yeon444/env-aai-web.git
 cd env-aai-web
 ```
-### 2.run docker compose
+### 2.run docker
 ```
 $docker-compose up -d --build
 ```
 
-### 3.composer
+### 3.initialization
 ```
 # access to container
 $docker-compose exec web bash
 
-# access to container
+# install composer
 [root@5f2582e9f467 html]# composer install
 
 # create .env
@@ -63,9 +63,12 @@ $docker-compose exec web bash
 # restart
 $docker-compose restart
 
-# access to container $ migrate
+# access to container & migrate
 $docker-compose exec web bash
 [root@5f2582e9f467 html]# php artisan migrate
+
+# create key
+[root@5f2582e9f467 html]# php artisan key:generate
 ```
 
 ### 4.Confirm
